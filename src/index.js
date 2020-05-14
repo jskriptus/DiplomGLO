@@ -1,10 +1,13 @@
 'use strict';
 
+import toggle from "./modules/toggle";
+
 // При клике на кнопку “Выбрать клуб” открывает выпадающее меню
-import showsClubs from "./modules/showsClubs";
+toggle('.club-select', '.clubs');
 // При клике на надпись "Записаться на бесплатный визит" открывает модальное окно
-import toggleFreeVisitForm from "./modules/toggleFreeVisitForm";
+toggle('.open-popup', '#free_visit_form');
+// При клике на кнопку “Перезвоните мне” открывает модальное окно
+toggle('.callback-btn', '#callback_form');
+// При клике на "подарок" открывается модальное окно, а сам подарок полностью исчезает со страницы
+toggle('.fixed-gift', '#gift');
 
-
-showsClubs();
-toggleFreeVisitForm();
