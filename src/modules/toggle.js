@@ -18,9 +18,15 @@ const toggle = (btn, form) => {
                 openBtn.style.display = 'none';
             }
 
+            
+
             if (target.matches('.close_icon') || target.closest('.overlay')) {
                 myForm.style.display = 'none';
             }
+        }
+
+        if (target.classList.value === 'btn close-btn') {
+            myForm.style.display = 'none';
         }
 
     };
