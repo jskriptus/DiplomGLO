@@ -15,7 +15,7 @@ toggle('.callback-btn', '#callback_form');
 toggle('.fixed-gift', '#gift');
 // Автопрокрутка слайдов .main-slider через каждые 5 секунд
 mainSlider(5000);
-
-sendForm();
-
+// Слайдер карусель услуг
 carousel();
+// Отправка форм
+sendForm();
