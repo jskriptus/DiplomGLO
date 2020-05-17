@@ -1,3 +1,5 @@
+import maskPhone from "./maskPhone";
+
 const sendForm = () => {
     // Сообщения которые уведомляют пользователя
     const errorMessage = 'Ошибка отправки формы..',
@@ -38,7 +40,6 @@ const sendForm = () => {
                     form.textContent = '';
                 })
                 .catch((error) => {
-                    
                     statusMessage.style.cssText = 'font-size: 1.5rem;color: red;';
                     statusMessage.textContent = errorMessage;
                     form.textContent = '';
@@ -46,12 +47,6 @@ const sendForm = () => {
                     console.error(error);
                 });
 
-            // Очищаем инпуты
-            [...form.elements].forEach(elem => {
-                if (elem.tagName.toLowerCase() === 'input') {
-                    elem.value = '';
-                }
-            });
         });
     });
 
@@ -64,6 +59,21 @@ const sendForm = () => {
             body: JSON.stringify(body),
         });
     };
+
+    // маска и валидация номера телефона 
+    const telephones = document.querySelectorAll('input[name="phone"]');
+    telephones.forEach((tel) => {
+        maskPhone(`#${tel.id}`);
+    });
+
+    // валидация ввода имен
+    const nameInput = document.querySelectorAll('input[name="name"]');
+    nameInput.forEach(input => {
+        input.addEventListener('input', () => {
+            const target = event.target;
+            target.value = target.value.replace(/[^а-яё]/gi, '');
+        });
+    });
 };
 
 export default sendForm;

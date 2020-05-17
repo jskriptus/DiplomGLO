@@ -5,6 +5,7 @@ import mainSlider from "./modules/mainSlider";
 import sendForm from "./modules/sendForm";
 import carousel from "./modules/carousel";
 
+
 // При клике на кнопку “Выбрать клуб” открывает выпадающее меню
 toggle('.club-select', '.clubs');
 // При клике на надпись "Записаться на бесплатный визит" открывает модальное окно
