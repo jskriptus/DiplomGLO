@@ -1,7 +1,7 @@
 const carousel = () => {
     const servicesSlider = document.querySelector('.services-slider-wrapper');
     const slides = servicesSlider.querySelectorAll('.slide');
-    const servicesSliderBlock = document.querySelector('.services-slider-block')
+    const servicesSliderBlock = document.querySelector('.services-slider-block');
     const next = servicesSliderBlock.querySelector('.next');
     const prev = servicesSliderBlock.querySelector('.prev');
     const sliderWidth = parseFloat(getComputedStyle(servicesSlider).width); // получаем ширину блока с слайдами 
@@ -17,8 +17,8 @@ const carousel = () => {
             item: item,
             position: index,
             transform: 0
-        })
-    })
+        });
+    });
 
     const position = {
         getItemMin: function () {
@@ -45,7 +45,7 @@ const carousel = () => {
         getMax: function () {
             return items[position.getItemMax()].position;
         }
-    }
+    };
 
     const transformItem = (direction) => {
         let nextItem;
@@ -69,15 +69,15 @@ const carousel = () => {
             transform += step;
         }
         servicesSlider.style.transform = `translateX( ${transform}%`;
-    }
+    };
 
     next.addEventListener('click', () => {
         transformItem('rigth');
-    })
+    });
 
     prev.addEventListener('click', () => {
         transformItem('left');
-    })
+    });
 
 };
 

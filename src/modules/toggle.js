@@ -23,10 +23,10 @@ const toggle = (btn, form) => {
             }
         }
 
-    }
+    };
 
-    openBtn.addEventListener('click', showOrClose)
-    myForm.addEventListener('click', showOrClose)
-}
+    openBtn.addEventListener('click', showOrClose);
+    myForm.addEventListener('click', showOrClose);
+};
 
 export default toggle;

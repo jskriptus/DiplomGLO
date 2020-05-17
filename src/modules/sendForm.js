@@ -64,6 +64,6 @@ const sendForm = () => {
             body: JSON.stringify(body),
         });
     };
-}
+};
 
 export default sendForm;
