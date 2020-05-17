@@ -2,6 +2,8 @@
 
 import toggle from "./modules/toggle";
 import mainSlider from "./modules/mainSlider";
+import sendForm from "./modules/sendForm";
+import carousel from "./modules/carousel";
 
 // При клике на кнопку “Выбрать клуб” открывает выпадающее меню
 toggle('.club-select', '.clubs');
@@ -13,3 +15,7 @@ toggle('.callback-btn', '#callback_form');
 toggle('.fixed-gift', '#gift');
 // Автопрокрутка слайдов .main-slider через каждые 5 секунд
 mainSlider(5000);
+
+sendForm();
+
+carousel();
