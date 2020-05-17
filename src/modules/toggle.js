@@ -18,21 +18,18 @@ const toggle = (btn, form) => {
                 openBtn.style.display = 'none';
             }
 
-            
-
-            if (target.matches('.close_icon') || target.closest('.overlay')) {
+            if (target.matches('.close_icon') || target.closest('.overlay') || target.classList.value === 'btn close-btn') {
                 myForm.style.display = 'none';
             }
         }
-
-        if (target.classList.value === 'btn close-btn') {
-            myForm.style.display = 'none';
-        }
-
     };
 
-    openBtn.addEventListener('click', showOrClose);
-    myForm.addEventListener('click', showOrClose);
+    if (openBtn && myForm) {
+        openBtn.addEventListener('click', showOrClose);
+        myForm.addEventListener('click', showOrClose);
+    } else {
+        return;
+    }
 };
 
 export default toggle;
