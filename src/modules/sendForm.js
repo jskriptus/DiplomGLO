@@ -51,7 +51,7 @@ const sendForm = () => {
     });
 
     const postData = (body) => {
-        return fetch("../../server.php", {
+        return fetch("/server.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
@@ -67,7 +67,7 @@ const sendForm = () => {
     });
 
     // валидация ввода имен
-    const nameInput = document.querySelectorAll('input[name="name"]');
+    const nameInput = document.querySelectorAll('input[placeholder="Ваше имя..."]');
     nameInput.forEach(input => {
         input.addEventListener('input', () => {
             const target = event.target;
