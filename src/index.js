@@ -5,6 +5,7 @@ import mainSlider from "./modules/mainSlider";
 import sendForm from "./modules/sendForm";
 import carousel from "./modules/carousel";
 import calc from "./modules/calc";
+import gallery from "./modules/gallery"
 
 // При клике на кнопку “Выбрать клуб” открывает выпадающее меню
 toggle('.club-select', '.clubs');
@@ -22,3 +23,5 @@ carousel();
 sendForm();
 // Калькулятор
 calc();
+// галерея
+gallery();

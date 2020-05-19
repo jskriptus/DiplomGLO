@@ -1391,6 +1391,7 @@ nav.popup-menu .close-menu-btn img {
 
 .slider-dots li {
     float: left
+    
 }
 
 .slider-dots li button {
@@ -1622,12 +1623,18 @@ nav.popup-menu .close-menu-btn img {
     padding-right: 75px;
     max-width: 900px;
     margin: 0 auto;
-    text-align: center
+    text-align: center;
+    position: relative;
 }
 
 #gallery .gallery-slider .slide {
     margin: 0 auto !important;
-    width: 100%
+    width: 100%;
+    display: none;
+}
+
+#gallery .gallery-slider .slide.active {
+    display: block;
 }
 
 #gallery .gallery-slider .slider-arrow {
