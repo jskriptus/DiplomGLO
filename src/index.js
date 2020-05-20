@@ -7,6 +7,7 @@ import carousel from "./modules/carousel";
 import calc from "./modules/calc";
 import gallery from "./modules/gallery";
 import totop from "./modules/totop";
+import topMenu from "./modules/topMenu";
 
 // При клике на кнопку “Выбрать клуб” открывает выпадающее меню
 toggle('.club-select', '.clubs');
@@ -28,3 +29,5 @@ calc();
 gallery();
 // Стрелка которая  возвращает вверх страницы 
 totop();
+// top menu
+topMenu();
