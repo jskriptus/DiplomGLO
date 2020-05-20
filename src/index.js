@@ -8,6 +8,7 @@ import calc from "./modules/calc";
 import gallery from "./modules/gallery";
 import totop from "./modules/totop";
 import topMenu from "./modules/topMenu";
+import validationFields from "./modules/validationFields";
 
 // При клике на кнопку “Выбрать клуб” открывает выпадающее меню
 toggle('.club-select', '.clubs');
@@ -31,3 +32,5 @@ gallery();
 totop();
 // top menu
 topMenu();
+// Валидация форм
+validationFields();

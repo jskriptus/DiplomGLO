@@ -4,13 +4,12 @@ const calc = () => {
         price = document.querySelector('#price-total');
 
     let discount = 1;
+    let totalPrice = 2999;
 
     const addPrice = () => {
-
-        let totalPrice = 0;
         time.forEach(item => {
             if (item.hasAttribute('checked')) {
-                totalPrice = Math.floor(2999 * discount);
+                totalPrice = Math.floor(totalPrice * discount);
                 price.textContent = totalPrice;
             }
             item.addEventListener('click', () => {
@@ -28,24 +27,23 @@ const calc = () => {
                 } else if (target.value === '12') {
                     totalPrice = Math.floor(19900 * discount);
                     price.textContent = totalPrice;
+                } else {
+                    return;
                 }
-            })
-        })
-
-    }
+            });
+        });
+    };
 
     if (time && promocode && price) {
-        addPrice();
-
         promocode.addEventListener('input', () => {
             const target = event.target;
             if (target.value === 'ТЕЛО2019') {
                 discount = 0.70;
                 addPrice();
             }
-
-        })
+        });
+        addPrice();
     }
-}
+};
 
 export default calc;

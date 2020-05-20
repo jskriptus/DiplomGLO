@@ -1,28 +1,26 @@
-import maskPhone from "./maskPhone";
-
 const sendForm = () => {
     // Сообщения которые уведомляют пользователя
     const errorMessage = 'Ошибка отправки формы..',
         loadMessage = 'Идет отправка данных..',
         succesMessage = 'Круто! Мы скоро с вами свяжемся!';
 
-    // Получаем формы
-    const forms = document.querySelectorAll('form');
     // Создаем элемент который будем добавлять на страницу
     const statusMessage = document.createElement('div');
     // Присваиваем этому элементу размер текста и цвет
     statusMessage.style.cssText = 'font-size: 1.5rem; color: white;';
-    // Вешаем обработчик события submit на формы
-    forms.forEach(form => {
-        form.addEventListener('submit', event => {
+
+    const processesForm = (event) => {
+        const target = event.target;
+
+        if (target.closest('form')) {
             // Убираем стандартное поведение браузера (перезагрузку страницы после нажатия кнопки "Отправить")
             event.preventDefault();
             // Добавляем ранее созданный элемент на страницу после формы
-            form.insertAdjacentElement('beforebegin', statusMessage);
+            target.insertAdjacentElement('beforebegin', statusMessage);
             // Добавляем сообщение на страницу уведомляющее пользователя о начале загрузки его данных
             statusMessage.textContent = loadMessage;
             // Создаем обьект formdata который записывает все введенные данные из формы (из тех инпутов которые содержат атрибут name)
-            const formData = new FormData(form);
+            const formData = new FormData(target);
             // Создаем переменную в которой хранится обьект
             const body = {};
             // Перебираем данные из обьекта formdata и записываем значения в вышесозданный обьект
@@ -37,18 +35,20 @@ const sendForm = () => {
                     }
                     statusMessage.style.cssText = 'font-size: 1.5rem;color: green;';
                     statusMessage.textContent = succesMessage;
-                    form.textContent = '';
+                    target.textContent = '';
                 })
                 .catch((error) => {
                     statusMessage.style.cssText = 'font-size: 1.5rem;color: red;';
                     statusMessage.textContent = errorMessage;
-                    form.textContent = '';
+                    target.textContent = '';
 
                     console.error(error);
                 });
+        } else {
+            return;
+        }
 
-        });
-    });
+    };
 
     const postData = (body) => {
         return fetch("/server.php", {
@@ -60,19 +60,8 @@ const sendForm = () => {
         });
     };
 
-    // маска и валидация номера телефона 
-    const telephones = document.querySelectorAll('input[name="phone"]');
-    telephones.forEach((tel) => {
-        maskPhone(`#${tel.id}`);
-    });
-
-    // валидация ввода имен
-    const nameInput = document.querySelectorAll('input[placeholder="Ваше имя..."]');
-    nameInput.forEach(input => {
-        input.addEventListener('input', () => {
-            const target = event.target;
-            target.value = target.value.replace(/[^а-яё]/gi, '');
-        });
+    window.addEventListener('submit', (event) => {
+        processesForm(event);
     });
 };
 

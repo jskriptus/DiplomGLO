@@ -1,5 +1,4 @@
 const topMenu = () => {
-    const topMenu = document.querySelector('.top-menu');
     const hiddenSmall = document.querySelector('.hidden-small');
     const burgerMenu = document.querySelector('.menu-button');
     const popupMenu = document.querySelector('.popup-menu');
@@ -12,11 +11,11 @@ const topMenu = () => {
     window.addEventListener('scroll', () => {
         const scrollTop = document.documentElement.scrollTop;
 
-        if (scrollTop > topMenu.offsetTop) {
-            topMenu.classList.add('menu-fix');
+        if (scrollTop > burgerMenu.offsetTop) {
+            burgerMenu.classList.add('menu-fix');
             return;
         } else {
-            topMenu.classList.remove('menu-fix');
+            burgerMenu.classList.remove('menu-fix');
             return;
         }
     });
