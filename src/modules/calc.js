@@ -3,40 +3,47 @@ const calc = () => {
         promocode = document.querySelector('input[placeholder="Промокод"]'),
         price = document.querySelector('#price-total');
 
-    if (time && promocode && price) {
-        let totalPrice = 0;
+    let discount = 1;
 
-        time.forEach(item => {
-            if (item.hasAttribute('checked')) {
-                totalPrice = 2999;
-                price.textContent = totalPrice;
-            }
-            item.addEventListener('click', () => {
-                const target = event.target;
-
-                if (target.value === '1') {
-                    totalPrice = 2999;
-                    price.textContent = totalPrice;
-                } else if (target.value === '6') {
-                    totalPrice = 9900;
-                    price.textContent = totalPrice;
-                } else if (target.value === '9') {
-                    totalPrice = 13900;
-                    price.textContent = totalPrice;
-                } else if (target.value === '12') {
-                    totalPrice = 19900;
+    const addPrice = () => {
+        if (time && promocode && price) {
+            let totalPrice = 0;
+            time.forEach(item => {
+                if (item.hasAttribute('checked')) {
+                    totalPrice = Math.floor(2999 * discount);
                     price.textContent = totalPrice;
                 }
-            })
-        })
+                item.addEventListener('click', () => {
+                    const target = event.target;
 
-        promocode.addEventListener('input', () => {
-            const target = event.target;
-            if (target.value === 'ТЕЛО2019') {
-                price.textContent = Math.floor(totalPrice - (totalPrice * 30 / 100));
-            }
-        })
+                    if (target.value === '1') {
+                        totalPrice = Math.floor(2999 * discount);
+                        price.textContent = totalPrice;
+                    } else if (target.value === '6') {
+                        totalPrice = Math.floor(9900 * discount);
+                        price.textContent = totalPrice;
+                    } else if (target.value === '9') {
+                        totalPrice = Math.floor(13900 * discount);
+                        price.textContent = totalPrice;
+                    } else if (target.value === '12') {
+                        totalPrice = Math.floor(19900 * discount);
+                        price.textContent = totalPrice;
+                    }
+                })
+            })
+        }
     }
+
+    addPrice();
+
+    promocode.addEventListener('input', () => {
+        const target = event.target;
+        if (target.value === 'ТЕЛО2019') {
+            discount = 0.70;
+            addPrice();
+        }
+
+    })
 }
 
 export default calc;
