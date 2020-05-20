@@ -5,7 +5,8 @@ import mainSlider from "./modules/mainSlider";
 import sendForm from "./modules/sendForm";
 import carousel from "./modules/carousel";
 import calc from "./modules/calc";
-import gallery from "./modules/gallery"
+import gallery from "./modules/gallery";
+import totop from "./modules/totop";
 
 // При клике на кнопку “Выбрать клуб” открывает выпадающее меню
 toggle('.club-select', '.clubs');
@@ -25,3 +26,5 @@ sendForm();
 calc();
 // галерея
 gallery();
+// Стрелка которая  возвращает вверх страницы 
+totop();
