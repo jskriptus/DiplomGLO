@@ -35,7 +35,7 @@ const sendForm = () => {
             if (checkbox) {
                 if (!checkbox[0].checked) {
                     popupThank();
-                    showMessage(form, 'Согласитесь на обработку своих персональных данных', 'orange');
+                    showMessage('Согласитесь на обработку своих персональных данных', 'orange');
                     return;
                 }
             }
@@ -56,14 +56,14 @@ const sendForm = () => {
                     }
 
                     popupThank();
-                    showMessage(form, succesMessage, 'green');
+                    showMessage(succesMessage, 'green');
                     form.reset();
                 })
                 .catch((error) => {
                     formContentHeader.textContent = 'Ошибка!'
                     formContent.textContent = errorMessage;
                     popupThank();
-                    showMessage(form, errorMessage, 'red')
+                    showMessage(errorMessage, 'red')
                     form.reset();
                     console.error(error);
                 });
