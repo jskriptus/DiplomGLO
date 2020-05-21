@@ -10,9 +10,9 @@ const sendForm = () => {
         loadMessage = 'Идет отправка данных..',
         succesMessage = 'Круто! Мы скоро с вами свяжемся!';
 
-    const showMessage = (message, color) => {
-        formContentHeader.textContent = 'Внимание!'
-        formContent.style.cssText = `font-size: 1.5rem;color:${color}`
+    const showMessage = (message, color, type) => {
+        formContentHeader.textContent = type;
+        formContent.style.cssText = `font-size: 1.5rem;color:${color}`;
         formContent.textContent = message;
     };
 
@@ -35,7 +35,7 @@ const sendForm = () => {
             if (checkbox) {
                 if (!checkbox[0].checked) {
                     popupThank();
-                    showMessage('Согласитесь на обработку своих персональных данных', 'orange');
+                    showMessage('Согласитесь на обработку своих персональных данных', 'orange', 'Внимание!');
                     return;
                 }
             }
@@ -56,19 +56,18 @@ const sendForm = () => {
                     }
 
                     popupThank();
-                    showMessage(succesMessage, 'green');
+                    showMessage(succesMessage, 'green', 'Спасибо!');
                     form.reset();
                 })
                 .catch((error) => {
-                    formContentHeader.textContent = 'Ошибка!'
                     formContent.textContent = errorMessage;
                     popupThank();
-                    showMessage(errorMessage, 'red')
+                    showMessage(errorMessage, 'red', 'Ошибка!');
                     form.reset();
                     console.error(error);
                 });
-        })
-    })
+        });
+    });
 
 
 

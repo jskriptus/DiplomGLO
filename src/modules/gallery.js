@@ -15,7 +15,7 @@ const gallery = () => {
 
             sliderDots.insertAdjacentElement('afterbegin', dot);
             dot.insertAdjacentElement('afterbegin', button);
-        })
+        });
 
         dots = document.querySelectorAll('.slider-dots > li');
         dots[0].classList.add('slick-active');
@@ -24,11 +24,11 @@ const gallery = () => {
     addDots();
 
     const prevSlide = (slide, index, strClass) => {
-        slide[index].classList.remove(strClass)
+        slide[index].classList.remove(strClass);
     };
 
     const nextSlide = (slide, index, strClass) => {
-        slide[index].classList.add(strClass)
+        slide[index].classList.add(strClass);
     };
 
     
