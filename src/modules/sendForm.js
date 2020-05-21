@@ -1,26 +1,47 @@
+import popupThank from "./popupThank";
+
 const sendForm = () => {
+    const formContentHeader = document.querySelector('.form-content > h4');
+    const formContent = document.querySelector('.form-content > p');
+    const forms = document.querySelectorAll('form');
+
     // Сообщения которые уведомляют пользователя
     const errorMessage = 'Ошибка отправки формы..',
         loadMessage = 'Идет отправка данных..',
         succesMessage = 'Круто! Мы скоро с вами свяжемся!';
 
-    // Создаем элемент который будем добавлять на страницу
-    const statusMessage = document.createElement('div');
-    // Присваиваем этому элементу размер текста и цвет
-    statusMessage.style.cssText = 'font-size: 1.5rem; color: white;';
+    const showMessage = (form, message, color) => {
+        formContentHeader.textContent = 'Внимание!'
+        formContent.style.cssText = `font-size: 1.5rem;color:${color}`
+        formContent.textContent = message;
+    };
 
-    const processesForm = (event) => {
-        const target = event.target;
+    forms.forEach(form => {
 
-        if (target.closest('form')) {
-            // Убираем стандартное поведение браузера (перезагрузку страницы после нажатия кнопки "Отправить")
+        const postData = (body) => {
+            return fetch("/server.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify(body),
+            });
+        };
+
+        form.addEventListener('submit', () => {
             event.preventDefault();
-            // Добавляем ранее созданный элемент на страницу после формы
-            target.insertAdjacentElement('beforebegin', statusMessage);
-            // Добавляем сообщение на страницу уведомляющее пользователя о начале загрузки его данных
-            statusMessage.textContent = loadMessage;
+
+            const checkbox = [...event.target.elements].filter((item) => item.type === 'checkbox');
+            if (checkbox) {
+                if (!checkbox[0].checked) {
+                    popupThank();
+                    showMessage(form, 'Согласитесь на обработку своих персональных данных', 'orange');
+                    return;
+                }
+            }
+
             // Создаем обьект formdata который записывает все введенные данные из формы (из тех инпутов которые содержат атрибут name)
-            const formData = new FormData(target);
+            const formData = new FormData(form);
             // Создаем переменную в которой хранится обьект
             const body = {};
             // Перебираем данные из обьекта formdata и записываем значения в вышесозданный обьект
@@ -33,36 +54,25 @@ const sendForm = () => {
                     if (response.status !== 200) {
                         throw new Error("status newtwork not 200");
                     }
-                    statusMessage.style.cssText = 'font-size: 1.5rem;color: green;';
-                    statusMessage.textContent = succesMessage;
-                    target.textContent = '';
+
+                    popupThank();
+                    showMessage(form, succesMessage, 'green');
+                    form.reset();
                 })
                 .catch((error) => {
-                    statusMessage.style.cssText = 'font-size: 1.5rem;color: red;';
-                    statusMessage.textContent = errorMessage;
-                    target.textContent = '';
-
+                    formContentHeader.textContent = 'Ошибка!'
+                    formContent.textContent = errorMessage;
+                    popupThank();
+                    showMessage(form, errorMessage, 'red')
+                    form.reset();
                     console.error(error);
                 });
-        } else {
-            return;
-        }
+        })
+    })
 
-    };
 
-    const postData = (body) => {
-        return fetch("/server.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-            },
-            body: JSON.stringify(body),
-        });
-    };
 
-    window.addEventListener('submit', (event) => {
-        processesForm(event);
-    });
+
 };
 
 export default sendForm;
