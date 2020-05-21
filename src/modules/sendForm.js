@@ -10,7 +10,7 @@ const sendForm = () => {
         loadMessage = 'Идет отправка данных..',
         succesMessage = 'Круто! Мы скоро с вами свяжемся!';
 
-    const showMessage = (form, message, color) => {
+    const showMessage = (message, color) => {
         formContentHeader.textContent = 'Внимание!'
         formContent.style.cssText = `font-size: 1.5rem;color:${color}`
         formContent.textContent = message;
