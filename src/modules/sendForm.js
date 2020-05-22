@@ -30,16 +30,28 @@ const sendForm = () => {
 
         form.addEventListener('submit', () => {
             event.preventDefault();
+        
+            if (event.submitter.id === 'footer_btn') {
+                const radio = [...event.target.elements].filter((item) => item.type === 'radio');
 
-            const checkbox = [...event.target.elements].filter((item) => item.type === 'checkbox');
-            if (checkbox) {
-                if (!checkbox[0].checked) {
+                if (!radio[0].checked && !radio[1].checked) {
                     popupThank();
-                    showMessage('Согласитесь на обработку своих персональных данных', 'orange', 'Внимание!');
+                    showMessage('Выберите клуб', 'orange', 'Внимание!');
                     return;
                 }
+            } else {
+                const checkbox = [...event.target.elements].filter((item) => item.type === 'checkbox');
+            
+                if (checkbox) {
+                    if (!checkbox[0].checked) {
+                        popupThank();
+                        showMessage('Согласитесь на обработку своих персональных данных', 'orange', 'Внимание!');
+                        return;
+                    }
+                }
             }
-
+            
+            
             // Создаем обьект formdata который записывает все введенные данные из формы (из тех инпутов которые содержат атрибут name)
             const formData = new FormData(form);
             // Создаем переменную в которой хранится обьект
